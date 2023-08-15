@@ -8,6 +8,7 @@ pipeline {
       CONTAINER_NAME = 'webapp-container'
       PORT_EXTERNE = 80
       PORT_INTERNE = 80
+      IP_DOCKER_JOKER = '172.17.0.1'
     }
     agent none
     stages{
@@ -37,6 +38,10 @@ pipeline {
             script {
               sh ''' 
                  curl http://${NODE_NAME} | grep -q "JENKINS NOTYLUS GROUP"
+                 expected_content=$(docker run --rm ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG} cat ${PATH_COHERENCE})
+                 actual_content=$(docker run --rm ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG} curl -s http://${IP_DOCKER_JOKER}:${EXTERNAL_PORT})
+                 if [ "$actual_content" != "$expected_content" ]; then echo "Contenu incorrect"; exit 1; fi
+
               '''
             }
           }
