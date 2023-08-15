@@ -72,7 +72,7 @@ pipeline {
           steps {
             script {
               sh ''' 
-                 docker run --rm jordi/ab -k -c 100 -n 100000  http://${IP_DOCKER_JOKER}
+                 docker run --rm jordi/ab -k -c 100 -n 100000  http://${IP_DOCKER_JOKER}/
               '''
             }
           }
