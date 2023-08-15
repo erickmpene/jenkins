@@ -11,7 +11,7 @@ pipeline {
     }
     agent none
     stages{
-        stage('Construction image') {
+        stage('CONSTRUCTION_IMAGE') {
           agent any
           steps {
             script {
@@ -19,7 +19,7 @@ pipeline {
             }
           }
         }
-        stage('Execute container') {
+        stage('START_CONTAINER') {
           agent any 
           steps {
             script {
@@ -29,13 +29,30 @@ pipeline {
               '''
             }
           }
+
         }
-        stage('Test image') {
+        stage('TEST_ACCEPTATION') {
           agent any
           steps {
             script {
               sh ''' 
                  curl http://${NODE_NAME} | grep -q "JENKINS NOTYLUS GROUP"
+              '''
+            }
+          }
+          stage('TEST DISPONIBILITE') {
+              steps {
+                  echo "This is TEST DISPONIBILITE"
+              }
+          }
+        }
+        stage('TEST COHERENCE') {
+          agent any  
+          steps {
+            script {
+              sh ''' 
+                 echo "This is TEST COHERENCE"
+
               '''
             }
           }
