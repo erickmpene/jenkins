@@ -18,7 +18,7 @@ pipeline {
       PRODUCTION_USER = 'jenkins-production'
 
     }
-    agent any 
+    agent none  
     stages{
         stage('BUILD_IMAGE') {
           agent any
