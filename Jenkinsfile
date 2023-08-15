@@ -72,7 +72,7 @@ pipeline {
           steps {
             script {
               sh ''' 
-                 docker run --rm jordi/ab -k -c 100 -n 100000  http://172.17.0.1:$EXTERNAL_PORT/
+                 docker run --rm jordi/ab -k -c 100 -n 100000  http://172.17.0.1:80/
               '''
             }
           }
