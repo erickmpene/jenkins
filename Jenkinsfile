@@ -17,17 +17,17 @@ pipeline {
             }
           }
         }
-        // stage('Execution du container based on builded image') {
-        //   agent any
-        //   steps {
-        //     script {
-        //       sh ''' 
-        //          docker run -d --name ${CONTAINER_NAME} -p ${PORT_EXTERNE}:${PORT_INTERNE} ${USER_NAME}/${IMAGE_NAME}:${IMAGE_TAG}
-        //          sleep 5
-        //       '''
-        //     }
-        //   }
-        // }
+        stage('Execution du container based on builded image') {
+          agent any
+          steps {
+            script {
+              sh ''' 
+                 docker run -d --name ${CONTAINER_NAME} -p ${PORT_EXTERNE}:${PORT_INTERNE} ${USER_NAME}/${IMAGE_NAME}:${IMAGE_TAG}
+                 sleep 5
+              '''
+            }
+          }
+        }
         // stage('Test image') {
         //   agent any
         //   steps {
