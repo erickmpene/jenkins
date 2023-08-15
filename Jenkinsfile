@@ -22,7 +22,7 @@ pipeline {
           steps {
             script {
               sh ''' 
-                 docker run -d --name ${CONTAINER_NAME} -p ${PORT_EXTERNE}:${PORT_INTERNE} ${USER_NAME}/${IMAGE_NAME}:${IMAGE_TAG}
+                 docker run -d --name ${CONTAINER_NAME} -p ${PORT_EXTERNE}:${PORT_INTERNE} ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG}
                  sleep 5
               '''
             }
