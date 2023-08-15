@@ -88,6 +88,16 @@ pipeline {
             }
           }
         }
+        stage('RELEASE_IMAGE') {
+          agent any  
+          steps {
+            script {
+              sh ''' 
+                 docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" 
+                 docker push ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG}
+              '''
+            }
+          }
+        }
     }
 }       
-//
