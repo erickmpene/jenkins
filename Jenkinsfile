@@ -18,7 +18,7 @@ pipeline {
           }
         }
         stage('Execution du container based on builded image') {
-          agent none 
+          agent any 
           steps {
             script {
               sh ''' 
@@ -29,7 +29,7 @@ pipeline {
           }
         }
         stage('Test image') {
-          agent none
+          agent any
           steps {
             script {
               sh ''' 
@@ -39,7 +39,7 @@ pipeline {
           }
         }
         stage('Clean Container') {
-          agent none 
+          agent any  
           steps {
             script {
               sh ''' 
