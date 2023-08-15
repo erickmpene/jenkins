@@ -40,7 +40,7 @@ pipeline {
               '''
             }
           }
-          stage('TEST DISPONIBILITE') {
+          steps('TEST DISPONIBILITE') {
               steps {
                   echo "This is TEST DISPONIBILITE"
               }
