@@ -1,3 +1,5 @@
+// Pipeline jenkins
+
 pipeline {
     environment {
       IMAGE_NAME = 'jenkins'
