@@ -40,23 +40,23 @@ pipeline {
               '''
             }
           }
-          stage('TEST DISPONIBILITE') {
-              steps {
-                  echo "This is TEST DISPONIBILITE"
-              }
-          }
+          // stage('TEST DISPONIBILITE') {
+          //     steps {
+          //         echo "This is TEST DISPONIBILITE"
+          //     }
+          // }
         }
-        stage('TEST COHERENCE') {
-          agent any  
-          steps {
-            script {
-              sh ''' 
-                 echo "This is TEST COHERENCE"
+        // stage('TEST COHERENCE') {
+        //   agent any  
+        //   steps {
+        //     script {
+        //       sh ''' 
+        //          echo "This is TEST COHERENCE"
 
-              '''
-            }
-          }
-        }
+        //       '''
+        //     }
+        //   }
+        // }
         stage('Destroy Container') {
           agent any  
           steps {
