@@ -28,26 +28,26 @@ pipeline {
             }
           }
         }
-        // stage('Test image') {
-        //   agent any
-        //   steps {
-        //     script {
-        //       sh ''' 
-        //          curl http://${NODE_NAME} | grep -q "JENKINS NOTYLUS GROUP"
-        //       '''
-        //     }
-        //   }
-        // }
-        // stage('Clean Container') {
-        //   agent any
-        //   steps {
-        //     script {
-        //       sh ''' 
-        //          docker stop ${CONTAINER_NAME}
-        //          docker rm ${CONTAINER_NAME}
-        //       '''
-        //     }
-        //   }
-        // }
+        stage('Test image') {
+          agent any
+          steps {
+            script {
+              sh ''' 
+                 curl http://${NODE_NAME} | grep -q "JENKINS NOTYLUS GROUP"
+              '''
+            }
+          }
+        }
+        stage('Clean Container') {
+          agent any
+          steps {
+            script {
+              sh ''' 
+                 docker stop ${CONTAINER_NAME}
+                 docker rm ${CONTAINER_NAME}
+              '''
+            }
+          }
+        }
     }
 }       
