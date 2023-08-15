@@ -7,7 +7,7 @@ pipeline {
       PORT_EXTERNE = 80
       PORT_INTERNE = 80
     }
-    agent none 
+    agent ${NODE_NAME} 
     stages{
         stage('Construction image') {
           agent any
@@ -18,7 +18,7 @@ pipeline {
           }
         }
         stage('Execution du container based on builded image') {
-          agent any
+          agent ${NODE_NAME}
           steps {
             script {
               sh ''' 
@@ -29,7 +29,7 @@ pipeline {
           }
         }
         stage('Test image') {
-          agent any
+          agent ${NODE_NAME}
           steps {
             script {
               sh ''' 
@@ -39,7 +39,7 @@ pipeline {
           }
         }
         stage('Clean Container') {
-          agent any
+          agent ${NODE_NAME}
           steps {
             script {
               sh ''' 
