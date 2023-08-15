@@ -62,7 +62,7 @@ pipeline {
           steps {
             script {
               sh ''' 
-                 docker run --rm dcycle/broken-link-checker:3 http://${IP_DOCKER_JOKER}:${EXTERNAL_PORT}
+                 docker run --rm dcycle/broken-link-checker:3 http://${IP_DOCKER_JOKER}:${PORT_EXTERNE}
               '''
             }
           }
@@ -72,7 +72,7 @@ pipeline {
           steps {
             script {
               sh ''' 
-                 docker run --rm jordi/ab -k -c 100 -n 100000  http://${IP_DOCKER_JOKER}:80/
+                 docker run --rm jordi/ab -k -c 100 -n 100000  http://${IP_DOCKER_JOKER}:${PORT_EXTERNE}/
               '''
             }
           }
