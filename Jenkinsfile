@@ -10,8 +10,15 @@ pipeline {
       PORT_INTERNE = 80
       IP_DOCKER_JOKER = '172.17.0.1'
       PATH_COHERENCE = '/usr/share/nginx/html/index.html'
+      REVIEW_APP_ENDPOINT = 'review.notylus.local' 
+      STAGING_APP_ENDPOINT = 'staging.notylus.local'
+      PRODUCTION_APP_ENDPOINT = 'production.notylus.local'
+      REVIEW_USER = 'jenkins-review'
+      STAGING_USER = 'jenkins-staging'
+      PRODUCTION_USER = 'jenkins-production'
+
     }
-    agent none
+    agent any 
     stages{
         stage('BUILD_IMAGE') {
           agent any
@@ -78,7 +85,7 @@ pipeline {
           }
         }
         stage('DESTRUCTION_CONTAINER') {
-          agent any  
+          // agent any  
           steps {
             script {
               sh ''' 
@@ -89,7 +96,7 @@ pipeline {
           }
         }
         stage('RELEASE_IMAGE') {
-          agent any  
+          // agent any  
           steps {
             script {
               sh ''' 
@@ -99,5 +106,26 @@ pipeline {
             }
           }
         }
+        stage('DEPLOY_STAGING') {
+          agent any  
+          steps {
+            script {
+              sh ''' 
+                 ssh $STAGING_USER@$STAGING_APP_ENDPOINT "docker run -d --name ${CONTAINER_NAME} -p ${PORT_EXTERNE}:${PORT_INTERNE} ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG}"
+              '''
+            }
+          }
+        } 
+        stage('DEPLOY_PROD') {
+          agent any  
+          steps {
+            script {
+              sh ''' 
+                 docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" 
+
+              '''
+            }
+          }
+        }      
     }
 }       
