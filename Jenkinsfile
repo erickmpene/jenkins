@@ -40,11 +40,11 @@ pipeline {
               '''
             }
           }
-          steps('TEST DISPONIBILITE') {
-              script {
-                  echo "This is TEST DISPONIBILITE"
-              }
-          }
+          // steps('TEST DISPONIBILITE') {
+          //     script {
+          //         echo "This is TEST DISPONIBILITE"
+          //     }
+          // }
         }
         // stage('TEST COHERENCE') {
         //   agent any  
