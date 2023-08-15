@@ -53,7 +53,26 @@ pipeline {
             script {
               sh ''' 
                  docker run --rm ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG} curl -s -o /dev/null -w "%{http_code}" https://example.com
-
+              '''
+            }
+          }
+        }
+        stage('TEST LIEN') {
+          agent any  
+          steps {
+            script {
+              sh ''' 
+                 docker run --rm dcycle/broken-link-checker:3 http://${IP_DOCKER_JOKER}:${EXTERNAL_PORT}
+              '''
+            }
+          }
+        }
+        stage('TEST PERFORMANCE') {
+          agent any  
+          steps {
+            script {
+              sh ''' 
+                 docker run --rm jordi/ab -k -c 100 -n 100000 http://${IP_DOCKER_JOKER}:${EXTERNAL_PORT}/
               '''
             }
           }
