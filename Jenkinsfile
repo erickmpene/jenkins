@@ -1,9 +1,9 @@
 pipeline {
     environment {
-      IMAGE_NAME = jenkins
-      DOCKER_HUB_ID = erickmpene
-      IMAGE_TAG = latest 
-      CONTAINER_NAME = webapp-container
+      IMAGE_NAME = 'jenkins'
+      DOCKER_HUB_ID = 'erickmpene'
+      IMAGE_TAG = 'latest' 
+      CONTAINER_NAME = 'webapp-container'
       PORT_EXTERNE = 80
       PORT_INTERNE = 80
     }
