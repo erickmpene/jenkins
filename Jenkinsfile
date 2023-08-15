@@ -39,7 +39,7 @@ pipeline {
               sh ''' 
                  curl http://${NODE_NAME} | grep -q "JENKINS NOTYLUS GROUP"
                  expected_content=$(docker run --rm ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG} cat ${PATH_COHERENCE})
-                 actual_content=$(docker run --rm ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG} curl -s http://${IP_DOCKER_JOKER}:${EXTERNAL_PORT})
+                 actual_content=$(docker run --rm ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG} curl -s http://${IP_DOCKER_JOKER}:${PORT_EXTERNE})
                  if [ "$actual_content" != "$expected_content" ]; then echo "Contenu incorrect"; exit 1; fi
 
               '''
