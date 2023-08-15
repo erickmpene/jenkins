@@ -13,7 +13,7 @@ pipeline {
     }
     agent none
     stages{
-        stage('CONSTRUCTION_IMAGE') {
+        stage('BUILD_IMAGE') {
           agent any
           steps {
             script {
@@ -72,7 +72,7 @@ pipeline {
           steps {
             script {
               sh ''' 
-                 docker run --rm jordi/ab -k -c 100 -n 100000  http://${IP_DOCKER_JOKER}:${EXTERNAL_PORT}/
+                 docker run --rm jordi/ab -k -c 100 -n 100000  http://172.17.0.1:80/
               '''
             }
           }
