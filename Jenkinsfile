@@ -9,7 +9,7 @@ pipeline {
     }
     agent none 
     stages{
-        stage('Build image') {
+        stage('Construction image') {
           agent any
           steps {
             script {
@@ -17,7 +17,7 @@ pipeline {
             }
           }
         }
-        stage('Run container based on builded image') {
+        stage('Execution du container based on builded image') {
           agent any
           steps {
             script {
