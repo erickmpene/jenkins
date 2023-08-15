@@ -17,7 +17,7 @@ pipeline {
             }
           }
         }
-        stage('Execution du container based on builded image') {
+        stage('Execute container') {
           agent any 
           steps {
             script {
@@ -38,7 +38,7 @@ pipeline {
             }
           }
         }
-        stage('Clean Container') {
+        stage('Destroy Container') {
           agent any  
           steps {
             script {
