@@ -41,7 +41,7 @@ pipeline {
             }
           }
           steps('TEST DISPONIBILITE') {
-              steps {
+              script {
                   echo "This is TEST DISPONIBILITE"
               }
           }
