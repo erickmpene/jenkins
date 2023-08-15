@@ -33,7 +33,7 @@ pipeline {
           }
 
         }
-        stage('TEST_ACCEPTATION') {
+        stage('TEST COHERENCE') {
           agent any
           steps {
             script {
@@ -47,12 +47,12 @@ pipeline {
             }
           }
         }
-        stage('TEST_COHERENCE') {
+        stage('TEST DISPONIBILITE') {
           agent any  
           steps {
             script {
               sh ''' 
-                 echo "This is TEST COHERENCE"
+                 docker run --rm ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG} curl -s -o /dev/null -w "%{http_code}" https://example.com
 
               '''
             }
