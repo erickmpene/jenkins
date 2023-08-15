@@ -9,6 +9,7 @@ pipeline {
       PORT_EXTERNE = 80
       PORT_INTERNE = 80
       IP_DOCKER_JOKER = '172.17.0.1'
+      PATH_COHERENCE = '/usr/share/nginx/html/index.html'
     }
     agent none
     stages{
