@@ -84,8 +84,8 @@ pipeline {
             }
           }
         }
-        stage('DESTRUCTION_CONTAINER') {
-          // agent any  
+        stage('DELETE_CONTAINER') {
+          agent any  
           steps {
             script {
               sh ''' 
@@ -96,7 +96,7 @@ pipeline {
           }
         }
         stage('RELEASE_IMAGE') {
-          // agent any  
+          agent any  
           steps {
             script {
               sh ''' 
