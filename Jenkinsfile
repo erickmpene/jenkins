@@ -35,7 +35,7 @@ pipeline {
           steps {
             sshagent(credentials: ['jenkins-admin-key']) {
             sh 'ssh jenkins-staging@$STAGING_APP_ENDPOINT "docker run -d --name test -p 80:80 nginx"'
-            sh 'ssh jenkins-staging@$STAGING_APP_ENDPOINT "uptime"'
+            sh 'ssh jenkins-staging@$STAGING_APP_ENDPOINT "docker rm -f test"'
             }
           }
         }   
