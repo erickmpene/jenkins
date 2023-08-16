@@ -21,12 +21,12 @@ pipeline {
     stages{
         stage('DEPLOY_REVIEW') {
           agent any 
-          steps {
+//          steps {
           //  sshagent(credentials: ['jenkins-admin-key']) {
           //  sh 'ssh jenkins-review@$REVIEW_APP_ENDPOINT "docker run -d --name test -p 80:80 nginx"'
           //  sh 'ssh jenkins-review@$REVIEW_APP_ENDPOINT "uptime"'
           //  }
-          }
+//         }
         }   
     
 
