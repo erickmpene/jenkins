@@ -19,6 +19,14 @@ pipeline {
     }
     agent none   
     stages{
+        stage('BUILD_IMAGE') {
+          agent any
+          steps {
+            script {
+              sh 'docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG} -f web/Dockerfile .'
+            }
+          }
+        }
         stage('DEPLOY_REVIEW') {
           when{
               changeRequest()
