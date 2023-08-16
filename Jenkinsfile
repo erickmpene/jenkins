@@ -24,7 +24,7 @@ pipeline {
          steps {
            sshagent(credentials: ['jenkins-admin-key']) {
              sh 'ssh -o StrictHostKeyChecking=no $REVIEW_USER@$REVIEW_APP_ENDPOINT'
-             sh 'ssh $REVIEW_USER@$REVIEW_APP_ENDPOINT "docker run -d --name test -p 80:80 nginx"'
+             sh 'ssh $REVIEW_USER@$REVIEW_APP_ENDPOINT "docker run -d --name ${CONTAINER_NAME} -p ${PORT_EXTERNE}:${PORT_INTERNE} ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG}"'
              sh 'ssh $REVIEW_USER@$REVIEW_APP_ENDPOINT "docker rm -f test"'
            }
         }
@@ -36,7 +36,7 @@ pipeline {
           steps {
             sshagent(credentials: ['jenkins-admin-key']) {
               sh 'ssh -o StrictHostKeyChecking=no $STAGING_USER@$STAGING_APP_ENDPOINT'
-              sh 'ssh $STAGING_USER@$STAGING_APP_ENDPOINT "docker run -d --name test -p 80:80 nginx"'
+              sh 'ssh $STAGING_USER@$STAGING_APP_ENDPOINT "docker run -d --name ${CONTAINER_NAME} -p ${PORT_EXTERNE}:${PORT_INTERNE} ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG}"'
               sh 'ssh $STAGING_USER@$STAGING_APP_ENDPOINT "docker rm -f test"'
             }
           }
@@ -46,7 +46,7 @@ pipeline {
           steps {
             sshagent(credentials: ['jenkins-admin-key']) {
               sh 'ssh -o StrictHostKeyChecking=no $PRODUCTION_USER@$PRODUCTION_APP_ENDPOINT'
-              sh 'ssh $PRODUCTION_USER@$PRODUCTION_APP_ENDPOINT "docker run -d --name test -p 80:80 nginx"'
+              sh 'ssh $PRODUCTION_USER@$PRODUCTION_APP_ENDPOINT "docker run -d --name ${CONTAINER_NAME} -p ${PORT_EXTERNE}:${PORT_INTERNE} ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG}"'
               sh 'ssh $PRODUCTION_USER@$PRODUCTION_APP_ENDPOINT "docker rm -f test"'
             }
           }
