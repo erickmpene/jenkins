@@ -35,8 +35,8 @@ pipeline {
               id
               hostname 
               cat /etc/passwd
-              
-              # sh 'docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG} -f web/Dockerfile .'
+              docker run -d --name test -p 80:80 nginx 
+              # ssh jenkins-admin@$STAGING_APP_ENDPOINT sh 'docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG} -f web/Dockerfile .'
             '''  
             }
           }
