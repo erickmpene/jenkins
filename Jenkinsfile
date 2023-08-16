@@ -86,7 +86,8 @@ pipeline {
           }
         }
         stage('DELETE_CONTAINER') {
-          agent any  
+          agent any
+          when { expression { params.skip_test != true } } 
           steps {
             script {
               sh ''' 
