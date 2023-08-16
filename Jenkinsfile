@@ -19,23 +19,25 @@ pipeline {
     }
     agent none   
     stages{
-        // stage('DEPLOY_REVIEW') {
-        //   agent any 
-//          steps {
-          //  sshagent(credentials: ['jenkins-admin-key']) {
-          //  sh 'ssh jenkins-review@$REVIEW_APP_ENDPOINT "docker run -d --name test -p 80:80 nginx"'
-          //  sh 'ssh jenkins-review@$REVIEW_APP_ENDPOINT "uptime"'
-          //  }
-//         }
-        // }   
+        stage('DEPLOY_REVIEW') {
+          agent any 
+         steps {
+           sshagent(credentials: ['jenkins-admin-key']) {
+             sh 'ssh -o StrictHostKeyChecking=no jenkins-review@$REVIEW_APP_ENDPOINT'
+             sh 'ssh jenkins-review@$REVIEW_APP_ENDPOINT "docker run -d --name test -p 80:80 nginx"'
+             sh 'ssh jenkins-review@$REVIEW_APP_ENDPOINT "docker rm -f test"'
+           }
+        }
+        }   
     
 
         stage('DEPLOY_STAGING') {
           agent any 
           steps {
             sshagent(credentials: ['jenkins-admin-key']) {
-            sh 'ssh jenkins-staging@$STAGING_APP_ENDPOINT "docker run -d --name test -p 80:80 nginx"'
-            sh 'ssh jenkins-staging@$STAGING_APP_ENDPOINT "docker rm -f test"'
+              sh 'ssh -o StrictHostKeyChecking=no jenkins-staging@$STAGING_APP_ENDPOINT'
+              sh 'ssh jenkins-staging@$STAGING_APP_ENDPOINT "docker run -d --name test -p 80:80 nginx"'
+              sh 'ssh jenkins-staging@$STAGING_APP_ENDPOINT "docker rm -f test"'
             }
           }
         }   
@@ -45,7 +47,7 @@ pipeline {
             sshagent(credentials: ['jenkins-admin-key']) {
               sh 'ssh -o StrictHostKeyChecking=no jenkins-production@$PRODUCTION_APP_ENDPOINT'
               sh 'ssh jenkins-production@$PRODUCTION_APP_ENDPOINT "docker run -d --name test -p 80:80 nginx"'
-              sh 'ssh jenkins-production@$PRODUCTION_APP_ENDPOINT "uptime"'
+              sh 'ssh jenkins-production@$PRODUCTION_APP_ENDPOINT "docker rm -f test"'
             }
           }
         }   
