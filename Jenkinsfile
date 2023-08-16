@@ -32,9 +32,8 @@ pipeline {
             sh '''
               pwd
               ls -lart
-              cd  web
-              cat Dockerfile
-              docker build -t test .
+              cat web/Dockerfile
+              docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG} -f web/Dockerfile .
               # ssh jenkins-admin@192.168.1.182 "docker run -d --name test -p 80:80 nginx" 
               # ssh jenkins-admin@$STAGING_APP_ENDPOINT sh 'docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG} -f web/Dockerfile .'
             '''  
