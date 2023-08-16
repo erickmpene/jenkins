@@ -20,15 +20,12 @@ pipeline {
     agent none   
     stages{
         stage('DEPLOY_STAGING') {
-          agent any
-          environment {
-            STAGING_USER = credentials('jenkins-admin-key')
-          } 
+          agent any 
           steps {
-            sshagent(credentials: ['jenkins-admin-key']) {
+//            sshagent(credentials: ['jenkins-admin-key']) {
              sh 'ssh jenkins-staging@$STAGING_APP_ENDPOINT "docker run -d --name test -p 80:80 nginx"'
              sh 'ssh jenkins-staging@$STAGING_APP_ENDPOINT "uptime"'
-            }
+ //           }
           }
         }   
     }
