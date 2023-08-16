@@ -32,8 +32,6 @@ pipeline {
             }
         }
         }   
-    
-
         stage('DEPLOY_STAGING') {
           when{
               branch "fx_1"
