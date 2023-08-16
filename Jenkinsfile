@@ -21,12 +21,12 @@ pipeline {
     stages{
         stage('DEPLOY_REVIEW') {
           agent any 
-         steps {
-           sshagent(credentials: ['jenkins-admin-key']) {
-             sh 'ssh -o StrictHostKeyChecking=no $REVIEW_USER@$REVIEW_APP_ENDPOINT'
-             sh 'ssh $REVIEW_USER@$REVIEW_APP_ENDPOINT "docker run -d --name ${CONTAINER_NAME} -p ${PORT_EXTERNE}:${PORT_INTERNE} ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG}"'
-             sh 'ssh $REVIEW_USER@$REVIEW_APP_ENDPOINT "docker rm -f ${CONTAINER_NAME}"'
-           }
+          steps {
+            sshagent(credentials: ['jenkins-admin-key']) {
+              sh 'ssh -o StrictHostKeyChecking=no $REVIEW_USER@$REVIEW_APP_ENDPOINT'
+              sh 'ssh $REVIEW_USER@$REVIEW_APP_ENDPOINT "docker run -d --name ${CONTAINER_NAME} -p ${PORT_EXTERNE}:${PORT_INTERNE} ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG}"'
+              sh 'ssh $REVIEW_USER@$REVIEW_APP_ENDPOINT "docker rm -f ${CONTAINER_NAME}"'
+            }
         }
         }   
     
@@ -42,6 +42,9 @@ pipeline {
           }
         }   
         stage('DEPLOY_PRODUCTION') {
+          when{
+              branch "main"
+          }
           agent any 
           steps {
             sshagent(credentials: ['jenkins-admin-key']) {
