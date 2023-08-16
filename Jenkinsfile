@@ -30,7 +30,7 @@ pipeline {
           }
           steps {
             sh '''
-              whoami
+              # whoami
               cat /etc/resolv.conf
               hostname -I
               id
