@@ -26,8 +26,8 @@ pipeline {
           } 
           steps {
             sshagent(credentials: ['jenkins-admin-key']) {
-              sh 'ssh -o StrictHostKeyChecking=no jenkins-admin@$STAGING_APP_ENDPOINT uptime'
-             // sh 'ssh jenkins-admin@$STAGING_APP_ENDPOINT "docker run -d --name test -p 80:80 nginx"'
+            //  sh 'ssh -o StrictHostKeyChecking=no jenkins-admin@$STAGING_APP_ENDPOINT uptime'
+             sh 'ssh jenkins-admin@$STAGING_APP_ENDPOINT "docker run -d --name test -p 80:80 nginx"'
             }
             script { 
                  echo "ceci est un test"
