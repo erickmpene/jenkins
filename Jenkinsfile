@@ -34,6 +34,8 @@ pipeline {
               cat /etc/resolv.conf
               id
               hostname 
+              cat /etc/passwd
+              
               # sh 'docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG} -f web/Dockerfile .'
             '''  
             }
