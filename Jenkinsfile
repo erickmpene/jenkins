@@ -43,8 +43,9 @@ pipeline {
           agent any 
           steps {
             sshagent(credentials: ['jenkins-admin-key']) {
-            sh 'ssh jenkins-production@$PRODUCTION_APP_ENDPOINT "docker run -d --name test -p 80:80 nginx"'
-            sh 'ssh jenkins-production@$PRODUCTION_APP_ENDPOINT "uptime"'
+              sh 'ssh -o StrictHostKeyChecking=no jenkins-production@$PRODUCTION_APP_ENDPOINT'
+              sh 'ssh jenkins-production@$PRODUCTION_APP_ENDPOINT "docker run -d --name test -p 80:80 nginx"'
+              sh 'ssh jenkins-production@$PRODUCTION_APP_ENDPOINT "uptime"'
             }
           }
         }   
