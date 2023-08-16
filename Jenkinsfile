@@ -16,8 +16,9 @@ pipeline {
       REVIEW_USER = 'jenkins-review'
       STAGING_USER = 'jenkins-staging'
       PRODUCTION_USER = 'jenkins-production'
-
     }
+    parameters {
+      booleanParam(name: 'skip_test', defaultValue: false, description: 'Set to true to skip the test stage')}
     agent none  
     stages{
         stage('BUILD_IMAGE') {
@@ -95,38 +96,8 @@ pipeline {
             }
           }
         }
-        stage('RELEASE_IMAGE') {
-          agent any  
-          steps {
-            script {
-              sh ''' 
-                 docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" 
-                 docker push ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG}
-              '''
-            }
-          }
-        }
-        stage('DEPLOY_STAGING') {
-          agent any  
-          steps {
-            script {
-              sh ''' 
-                 ssh $STAGING_USER@$STAGING_APP_ENDPOINT "docker run -d --name ${CONTAINER_NAME} -p ${PORT_EXTERNE}:${PORT_INTERNE} ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG}"
-              '''
-            }
-          }
-        } 
-        stage('DEPLOY_PROD') {
-          agent any  
-          steps {
-            script {
-              sh ''' 
-                 docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" 
 
-              '''
-            }
-          }
-        }      
+     
     }
 }       
 
