@@ -24,11 +24,10 @@ pipeline {
         stage('BUILD_IMAGE') {
           agent { docker { image 'docker:dind' } }
           steps {
-            script {
               sh 'docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG} -f web/Dockerfile .'
             }
           }
-        }
+        
         stage('START_CONTAINER') {
           agent any 
           steps {
