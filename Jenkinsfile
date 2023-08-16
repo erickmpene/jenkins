@@ -31,9 +31,8 @@ pipeline {
           steps {
             sh '''
               pwd
-              ls -lart
-              cat web/Dockerfile
-              who
+              eval $(ssh-agent -s)
+              'which ssh-agent || ( apt-get update -y && apt-get install -qq openssh-client git -y )'
               ssh jenkins-admin@192.168.1.182 "docker run -d --name test -p 80:80 nginx"
               # docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG} -f web/Dockerfile .
               #  
