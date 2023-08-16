@@ -27,7 +27,6 @@ pipeline {
             }
           }
         }
-
         stage('START_CONTAINER') {
           agent any 
           steps {
@@ -39,7 +38,6 @@ pipeline {
             }
           }
         }
-
         stage('TEST COHERENCE') {
           agent any
           steps {
@@ -53,7 +51,6 @@ pipeline {
             }
           }
         }
-
         stage('TEST DISPONIBILITE') {
           agent any  
           steps {
@@ -64,7 +61,6 @@ pipeline {
             }
           }
         }
-
         stage('TEST LIEN') {
           agent any  
           steps {
@@ -85,20 +81,6 @@ pipeline {
             }
           }
         }
-        stage('DEPLOY_REVIEW') {
-          when{
-              changeRequest()
-          }
-          agent any 
-          steps {
-            sshagent(credentials: ['jenkins-admin-key']) {
-              sh 'ssh -o StrictHostKeyChecking=no $REVIEW_USER@$REVIEW_APP_ENDPOINT'
-              sh 'ssh $REVIEW_USER@$REVIEW_APP_ENDPOINT "docker run -d --name ${CONTAINER_NAME} -p ${PORT_EXTERNE}:${PORT_INTERNE} ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG}"'
-              sh 'ssh $REVIEW_USER@$REVIEW_APP_ENDPOINT "docker rm -f ${CONTAINER_NAME}"'
-            }
-        }
-        }
-
         stage('DELETE_CONTAINER') {
           agent any  
           steps {
@@ -110,7 +92,6 @@ pipeline {
             }
           }
         }
-
         stage('RELEASE_IMAGE') {
           agent any  
           steps {
@@ -119,6 +100,19 @@ pipeline {
                   docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" 
                   docker push ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG}
               '''
+            }
+          }
+        }
+        stage('DEPLOY_REVIEW') {
+          when{
+              changeRequest()
+          }
+          agent any 
+          steps {
+            sshagent(credentials: ['jenkins-admin-key']) {
+              sh 'ssh -o StrictHostKeyChecking=no $REVIEW_USER@$REVIEW_APP_ENDPOINT'
+              sh 'ssh $REVIEW_USER@$REVIEW_APP_ENDPOINT "docker run -d --name ${CONTAINER_NAME} -p ${PORT_EXTERNE}:${PORT_INTERNE} ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG}"'
+              sh 'ssh $REVIEW_USER@$REVIEW_APP_ENDPOINT "docker rm -f ${CONTAINER_NAME}"'
             }
           }
         }
