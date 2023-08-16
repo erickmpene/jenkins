@@ -39,7 +39,6 @@ pipeline {
             }
           }
         }   
-
         stage('DEPLOY_PRODUCTION') {
           agent any 
           steps {
