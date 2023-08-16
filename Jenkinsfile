@@ -20,17 +20,23 @@ pipeline {
     agent none   
     stages{
         stage('DEPLOY_STAGING') {
-          agent any 
+          agent any
+          environment {
+            STAGING_USER = credentials('jenkins-admin-key')
+          } 
           steps {
             script {
-              sh''' 
-                sshagent(["jenkins-admin-key"]) {
-                ssh $STAGING_USER@$STAGING_APP_ENDPOINT "docker run -d --name test -p 80:80 nginx"
-                  # sh 'ssh $STAGING_USER@$STAGING_APP_ENDPOINT "docker run -d --name ${CONTAINER_NAME} -p ${PORT_EXTERNE}:${PORT_INTERNE} ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG}"'
-                 }
+                withCredentials([sshUserPrivateKey(credentialsId: 'jenkins-admin-key', keyFileVariable: 'STAGING_USER')]) {
+                  sh 'ssh $STAGING_USER@$STAGING_APP_ENDPOINT "docker run -d --name test -p 80:80 nginx"'
+
+                } 
+                # sshagent(["jenkins-admin-key"]) {
+                # ssh $STAGING_USER@$STAGING_APP_ENDPOINT "docker run -d --name test -p 80:80 nginx"
+                # sh 'ssh $STAGING_USER@$STAGING_APP_ENDPOINT "docker run -d --name ${CONTAINER_NAME} -p ${PORT_EXTERNE}:${PORT_INTERNE} ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG}"'
+                # }
                  
                  echo "ceci est un test"
-              '''
+              
             }
           }
         }
