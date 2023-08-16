@@ -18,11 +18,15 @@ pipeline {
       PRODUCTION_USER = 'jenkins-production'
     }
     parameters {
-      booleanParam(name: 'skip_test', defaultValue: false, description: 'Set to true to skip the test stage')}
+      // booleanParam(name: 'skip_test', defaultValue: false, description: 'Set to true to skip the test stage')}
     agent none   
     stages{
         stage('BUILD_IMAGE') {
-          agent { docker { image 'docker:dind' } }
+          agent { 
+            docker { 
+              image 'docker:dind' 
+            }
+          }
           steps {
               sh 'docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG} -f web/Dockerfile .'
             }
