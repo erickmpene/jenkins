@@ -20,6 +20,9 @@ pipeline {
     agent none   
     stages{
         stage('DEPLOY_REVIEW') {
+          when{
+              changeRequest()
+          }
           agent any 
           steps {
             sshagent(credentials: ['jenkins-admin-key']) {
@@ -32,6 +35,9 @@ pipeline {
     
 
         stage('DEPLOY_STAGING') {
+          when{
+              branch "fx_1"
+          }
           agent any 
           steps {
             sshagent(credentials: ['jenkins-admin-key']) {
