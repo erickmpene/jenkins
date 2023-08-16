@@ -25,10 +25,10 @@ pipeline {
             STAGING_USER = credentials('jenkins-admin-key')
           } 
           steps {
-            script {
-                withCredentials([sshUserPrivateKey(credentialsId: 'jenkins-admin-key', keyFileVariable: 'STAGING_USER')]) {
-                  sh 'ssh jenkins-admin@$STAGING_APP_ENDPOINT "docker run -d --name test -p 80:80 nginx"'
-                } 
+            sshagent(credentials: 'jenkins-admin-key') {
+              sh 'ssh jenkins-admin@$STAGING_APP_ENDPOINT "docker run -d --name test -p 80:80 nginx"'
+            }
+            script { 
                  echo "ceci est un test"
             }
           }
