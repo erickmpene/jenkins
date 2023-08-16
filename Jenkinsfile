@@ -28,8 +28,8 @@ pipeline {
             }
           }
         }   
-    }
-    stages{
+    
+
         stage('DEPLOY_STAGING') {
           agent any 
           steps {
@@ -39,8 +39,7 @@ pipeline {
             }
           }
         }   
-    }
-    stages{
+
         stage('DEPLOY_PRODUCTION') {
           agent any 
           steps {
