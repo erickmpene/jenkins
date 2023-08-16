@@ -17,7 +17,7 @@ pipeline {
       STAGING_USER = 'jenkins-staging'
       PRODUCTION_USER = 'jenkins-production'
     }
-    parameters {
+    // parameters {
       // booleanParam(name: 'skip_test', defaultValue: false, description: 'Set to true to skip the test stage')}
     agent none   
     stages{
