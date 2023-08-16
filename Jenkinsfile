@@ -24,8 +24,9 @@ pipeline {
           steps {
             script {
               sh ''' 
-                 sshagent(['jenkins-admin-key']) {
-                  sh 'ssh $STAGING_USER@$STAGING_APP_ENDPOINT "docker run -d --name ${CONTAINER_NAME} -p ${PORT_EXTERNE}:${PORT_INTERNE} ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG}"'
+                 sshagent(["jenkins-admin-key"]) {
+                  sh 'ssh $STAGING_USER@$STAGING_APP_ENDPOINT "docker run -d --name test -p 80:80 nginx"'
+                  # sh 'ssh $STAGING_USER@$STAGING_APP_ENDPOINT "docker run -d --name ${CONTAINER_NAME} -p ${PORT_EXTERNE}:${PORT_INTERNE} ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG}"'
                  }
                  
                  echo "ceci est un test"
