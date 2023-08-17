@@ -35,7 +35,7 @@ pipeline {
           agent any
           steps {
             script {
-              sh 'set COMMIT=${GIT_COMMIT:0:7}'
+              sh 'set C__________________________OMMIT=${GIT_COMMIT:0:7}'
               sh 'env'
               sh 'set'
               // sh 'docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${COMMIT} -f web/Dockerfile .'
