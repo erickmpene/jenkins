@@ -1,4 +1,4 @@
-#### Jenkins Redhat/Centos Packages
+#### Deploy Jenkins Redhat/Centos Packages
 
 [![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
 #### 1. To use this repository, run the following command: 
