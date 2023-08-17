@@ -24,7 +24,7 @@ pipeline {
           agent any 
           steps{
               script {
-                sh 'echo "BRANCH_NAME: ${env.BRANCH_NAME}"'
+                sh 'echo "BRANCH_NAME: env.BRANCH_NAME"'
               }
           }
         }
