@@ -36,12 +36,10 @@ pipeline {
           steps {
             script {
               sh '''
-              C_______________________________OMMIT=${GIT_COMMIT:0:7}
-              echo $C_______________________________OMMIT
-              set
-              env
-              # sh 'docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${COMMIT} -f web/Dockerfile .'
-              # sh 'docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG_PRODUCTION} -f web/Dockerfile .'
+              COMMIT=${GIT_COMMIT:0:7}
+              echo $COMMIT
+              sh 'docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${COMMIT} -f web/Dockerfile .'
+              sh 'docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG_PRODUCTION} -f web/Dockerfile .'
               '''
             }
           }
