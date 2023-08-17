@@ -36,7 +36,7 @@ pipeline {
           steps {
             script {
               sh '''
-              COMMIT=${GIT_COMMIT:0:7}
+              C_______________________________OMMIT=${GIT_COMMIT:0:7}
               env
               # sh 'docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${COMMIT} -f web/Dockerfile .'
               # sh 'docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG_PRODUCTION} -f web/Dockerfile .'
