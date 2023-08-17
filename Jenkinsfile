@@ -14,6 +14,8 @@ pipeline {
       REVIEW_USER = 'jenkins-review'
       STAGING_USER = 'jenkins-staging'
       PRODUCTION_USER = 'jenkins-production'
+      MAIN_BRANCH = 'main'
+      STAGING_BRANCH = 'fx_1'
     }
     agent none   
     stages{
@@ -128,8 +130,7 @@ pipeline {
         }
         stage('DEPLOY_STAGING') {
           when{
-              // expression { GIT_BRANCH == 'origin/fx_1' }
-              branch 'fx_1'
+              expression { GIT_BRANCH == 'origin/fx_1' }
           }
           agent any 
           steps {
@@ -145,9 +146,7 @@ pipeline {
         }   
         stage('DEPLOY_PRODUCTION') {
           when {
-              expression { GIT_BRANCH == 'origin/main' }
-              // beforeAgent true 
-              // branch 'main'
+              expression { GIT_BRANCH == 'origin/${MAIN_BRANCH}' }
           }
           agent any 
           steps {
