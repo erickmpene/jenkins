@@ -24,7 +24,7 @@ pipeline {
           agent any 
           steps{
               script {
-                sh 'echo "BRANCH_NAME: $env.BUILD_TAG"'
+                echo "BRANCH_NAME is ${env.BUILD_TAG}"
               }
           }
         }
