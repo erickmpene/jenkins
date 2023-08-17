@@ -1,3 +1,5 @@
+@library('shared-library')
+
 pipeline {
     environment {
       IMAGE_NAME = 'jenkins'
@@ -161,14 +163,10 @@ pipeline {
         }   
     }
   post {
-      success {
-        slackSend (color: '#00FF00', message: "Job deployed successfully : Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'  (<${env.BUILD_URL}|Lien vers le job>)")
-      }
-      failure {
-        slackSend (color: '#00FF00', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-      }
       always{
-            slackSend ( channel: "Jenkins-ngh", token: "Prrrn6ueShlhbcYXwIJSd7C7", color: "good", message: "Test Email")
+        script {
+          slackNotifier currentBuild.result 
+        }
       }  
   }       
 }
