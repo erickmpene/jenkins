@@ -24,7 +24,7 @@ pipeline {
           agent any 
           steps{
               script {
-                sh 'echo "BRANCH_NAME: ${env.GIT_COMMIT}\"'
+                sh 'echo 'BRANCH_NAME: ${env.GIT_COMMIT}''
               }
           }
         }
