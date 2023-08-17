@@ -5,7 +5,7 @@ pipeline {
       IMAGE_NAME = 'jenkins'
       DOCKER_HUB_ID = 'erickmpene'
       IMAGE_TAG = 'toto'
-      SHORT___________________COMMIT= "${GIT_COMMIT}"
+      SHORT___________________COMMIT= '${GIT_COMMIT}'
       IMAGE_TAG_PRODUCTION = 'latest'
       CONTAINER_NAME = 'webapp-container'
       PORT_EXTERNE = 80
