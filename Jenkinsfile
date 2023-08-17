@@ -4,7 +4,7 @@ pipeline {
     environment {
       IMAGE_NAME = 'jenkins'
       DOCKER_HUB_ID = 'erickmpene'
-      IMAGE_TAG = "${env.GIT_COMMIT}"
+      IMAGE_TAG = "${env.BUILD_TAG}"
       IMAGE_TAG_PRODUCTION = 'latest'
       CONTAINER_NAME = 'webapp-container'
       PORT_EXTERNE = 80
@@ -24,7 +24,7 @@ pipeline {
           agent any 
           steps{
               script {
-                sh 'echo 'BRANCH_NAME: ${env.GIT_COMMIT}''
+                sh 'echo "BRANCH_NAME: "${env.BUILD_TAG}""'
               }
           }
         }
