@@ -25,19 +25,7 @@ pipeline {
           steps{
               script {
                 sh 'printenv'
-                // echo "BRANCH_NAME is ${env.GIT_BRANCH}"
-                // echo "BRANCH_NAME is ${env.BUILD_NUMBER}"
-                // echo "BRANCH_NAME is ${env.BUILD_ID}"
-                // echo "BRANCH_NAME is ${env.BUILD_DISPLAY_NAME}"
-                // echo "BRANCH_NAME is ${env.JOB_NAME}"
-                // echo "BRANCH_NAME is ${env.JOB_BASE_NAME}"
-                // echo "BRANCH_NAME is ${env.BUILD_TAG}"
-                // echo "BRANCH_NAME is ${env.EXECUTOR_NUMBER}"
-                // echo "BRANCH_NAME is ${env.NODE_NAME}"
-                // echo "BRANCH_NAME is ${env.NODE_LABELS}"
-                // echo "BRANCH_NAME is ${env.WORKSPACE}"
-
-                echo "You can also use \${BUILD_NUMBER} -> ${BUILD_NUMBER}"
+                echo "BRANCH_NAME is ${env.GIT_COMMIT,length=6}"
               }
           }
         }
