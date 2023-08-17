@@ -25,7 +25,7 @@ pipeline {
           steps{
               script {
                 sh 'printenv'
-                THE_COMMIT = ${GIT_COMMIT[0..6]}
+                sh 'THE_COMMIT = ${GIT_COMMIT[0..6]}'
               }
           }
         }
