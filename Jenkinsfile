@@ -25,7 +25,7 @@ pipeline {
           agent any 
           steps{
               script {
-                sh 'export ZHE_________________________________________COMMIT=${GIT_COMMIT}'
+                sh 'export ZHE_________________________________________COMMIT=${GIT_COMMIT[0..7]}'
                 sh 'printenv'
               }
           }
