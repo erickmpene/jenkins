@@ -28,7 +28,7 @@ pipeline {
                 // sh 'ZHE_____COMMIT="${GIT_COMMIT[0..7]}"'
                 // sh 'GIT_HASH = GIT_COMMIT.take(7)'
                 sh 'SHORT_COMMIT=${GIT_COMMIT}'  // ça marche
-                sh 'SHORT_COMMIT=${GIT_COMMIT[0..6]}' 
+                sh 'SHORT_COMMIT=${GIT_COMMIT:0:6}' 
                 // sh 'Zx________COMMIT=GIT_COMMIT.take(7)'
                 // sh 'set'
                 // sh 'printenv'
@@ -148,19 +148,19 @@ pipeline {
         //     }
         //   }
         // }   
-        stage('DEPLOY_PRODUCTION') {
-          when{
-              branch "main"
-          }
-          agent any 
-          steps {
-            sshagent(credentials: ['jenkins-admin-key']) {
-              sh 'ssh -o StrictHostKeyChecking=no $PRODUCTION_USER@$PRODUCTION_APP_ENDPOINT'
-              sh 'ssh $PRODUCTION_USER@$PRODUCTION_APP_ENDPOINT "docker run -d --name ${CONTAINER_NAME} -p ${PORT_EXTERNE}:${PORT_INTERNE} ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG_PRODUCTION}"'
-              sh 'ssh $PRODUCTION_USER@$PRODUCTION_APP_ENDPOINT "docker rm -f ${CONTAINER_NAME}"'
-            }
-          }
-        }   
+        // stage('DEPLOY_PRODUCTION') {
+        //   when{
+        //       branch "main"
+        //   }
+        //   agent any 
+        //   steps {
+        //     sshagent(credentials: ['jenkins-admin-key']) {
+        //       sh 'ssh -o StrictHostKeyChecking=no $PRODUCTION_USER@$PRODUCTION_APP_ENDPOINT'
+        //       sh 'ssh $PRODUCTION_USER@$PRODUCTION_APP_ENDPOINT "docker run -d --name ${CONTAINER_NAME} -p ${PORT_EXTERNE}:${PORT_INTERNE} ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG_PRODUCTION}"'
+        //       sh 'ssh $PRODUCTION_USER@$PRODUCTION_APP_ENDPOINT "docker rm -f ${CONTAINER_NAME}"'
+        //     }
+        //   }
+        // }   
     }
 }       
 
