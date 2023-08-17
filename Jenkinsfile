@@ -36,9 +36,9 @@ pipeline {
           steps {
             script {
               sh '''
-              COMMIT=${GIT_COMMIT:0:7}
+              COMMIT=from-commit-${GIT_COMMIT:0:7}
               echo $COMMIT
-              docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:from-commit-${COMMIT} -f web/Dockerfile .
+              docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${COMMIT} -f web/Dockerfile .
               docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG_PRODUCTION} -f web/Dockerfile .
               '''
             }
