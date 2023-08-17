@@ -128,7 +128,8 @@ pipeline {
         }
         stage('DEPLOY_STAGING') {
           when{
-              expression { GIT_BRANCH == 'origin/fx_1' }
+              // expression { GIT_BRANCH == 'origin/fx_1' }
+              branch 'fx_1'
           }
           agent any 
           steps {
@@ -144,7 +145,8 @@ pipeline {
         }   
         stage('DEPLOY_PRODUCTION') {
           when{
-              expression { GIT_BRANCH == 'origin/main' }
+              // expression { GIT_BRANCH == 'origin/main' }
+              branch 'main'
           }
           agent any 
           steps {
