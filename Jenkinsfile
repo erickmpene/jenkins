@@ -24,7 +24,19 @@ pipeline {
           agent any 
           steps{
               script {
-                echo "BRANCH_NAME is ${env.BUILD_TAG}"
+                echo "BRANCH_NAME is ${env.GIT_COMMIT}"
+                echo "BRANCH_NAME is ${env.GIT_PREVIOUS_COMMIT}"
+                echo "BRANCH_NAME is ${env.GIT_PREVIOUS_SUCCESSFUL_COMMIT}"
+                echo "BRANCH_NAME is ${env.GIT_BRANCH}"
+                echo "BRANCH_NAME is ${env.GIT_LOCAL_BRANCH}"
+                echo "BRANCH_NAME is ${env.GIT_CHECKOUT_DIR}"
+                echo "BRANCH_NAME is ${env.GIT_URL}"
+                echo "BRANCH_NAME is ${env.GIT_COMMITTER_NAME}"
+                echo "BRANCH_NAME is ${env.GIT_AUTHOR_NAME}"
+                echo "BRANCH_NAME is ${env.GIT_COMMITTER_EMAIL}"
+                echo "BRANCH_NAME is ${env.GIT_AUTHOR_EMAIL}"
+
+                echo "You can also use \${BUILD_NUMBER} -> ${BUILD_NUMBER}"
               }
           }
         }
