@@ -35,11 +35,13 @@ pipeline {
           agent any
           steps {
             script {
-              sh 'export C__________________________OMMIT=${GIT_COMMIT:0:7}'
-              sh 'env'
-              sh 'set'
-              // sh 'docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${COMMIT} -f web/Dockerfile .'
-              // sh 'docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG_PRODUCTION} -f web/Dockerfile .'
+              sh '''
+              export C__________________________OMMIT=${GIT_COMMIT:0:7}
+              env
+              set
+              # sh 'docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${COMMIT} -f web/Dockerfile .'
+              # sh 'docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG_PRODUCTION} -f web/Dockerfile .'
+              '''
             }
           }
         }
