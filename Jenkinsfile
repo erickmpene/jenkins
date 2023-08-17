@@ -24,17 +24,17 @@ pipeline {
           agent any 
           steps{
               script {
-                echo "BRANCH_NAME is ${env.BRANCH_IS_PRIMARY}"
-                echo "BRANCH_NAME is ${env.BRANCH_NAME}"
-                echo "BRANCH_NAME is ${env.CHANGE_ID}"
                 echo "BRANCH_NAME is ${env.GIT_BRANCH}"
-                echo "BRANCH_NAME is ${env.CHANGE_URL}"
-                echo "BRANCH_NAME is ${env.CHANGE_TITLE}"
-                echo "BRANCH_NAME is ${env.TAG_NAME}"
-                echo "BRANCH_NAME is ${env.TAG_TIMESTAMP}"
-                echo "BRANCH_NAME is ${env.TAG_UNIXTIME}"
-                echo "BRANCH_NAME is ${env.TAG_DATE}"
-                echo "BRANCH_NAME is ${env.JOB_DISPLAY_URL}"
+                echo "BRANCH_NAME is ${env.BUILD_NUMBER}"
+                echo "BRANCH_NAME is ${env.BUILD_ID}"
+                echo "BRANCH_NAME is ${env.BUILD_DISPLAY_NAME}"
+                echo "BRANCH_NAME is ${env.JOB_NAME}"
+                echo "BRANCH_NAME is ${env.JOB_BASE_NAME}"
+                echo "BRANCH_NAME is ${env.BUILD_TAG}"
+                echo "BRANCH_NAME is ${env.EXECUTOR_NUMBER}"
+                echo "BRANCH_NAME is ${env.NODE_NAME}"
+                echo "BRANCH_NAME is ${env.NODE_LABELS}"
+                echo "BRANCH_NAME is ${env.WORKSPACE}"
 
                 echo "You can also use \${BUILD_NUMBER} -> ${BUILD_NUMBER}"
               }
