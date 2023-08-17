@@ -146,7 +146,7 @@ pipeline {
         }   
         stage('DEPLOY_PRODUCTION') {
           when {
-              expression { GIT_BRANCH == 'origin/${MAIN_BRANCH}' }
+              expression { GIT_BRANCH == 'origin/main' }
           }
           agent any 
           steps {
