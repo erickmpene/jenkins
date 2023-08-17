@@ -17,20 +17,6 @@ pipeline {
     }
     agent none   
     stages{
-        stage('debug') {
-          agent any 
-          steps{
-              script {
-                // sh 'ZHE_____COMMIT="${GIT_COMMIT[0..7]}"'
-                // sh 'GIT_HASH = GIT_COMMIT.take(7)'
-                // sh 'SHORT_COMMIT=${GIT_COMMIT}'  
-                sh 'SHORT_COMMIT=${GIT_COMMIT:0:7}' 
-                // sh 'Zx________COMMIT=GIT_COMMIT.take(7)'
-                // sh 'set'
-                // sh 'printenv'
-              }
-          }
-        }
         stage('BUILD_IMAGE') {
           agent any
           steps {
@@ -172,6 +158,14 @@ pipeline {
           }
         }   
     }
+  post {
+      success {
+        slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+      }
+      failure {
+        slackSend(color: '#00FF00', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+      }
+  }  
 }       
 
 
