@@ -166,10 +166,10 @@ pipeline {
         slackSend (color: '#00FF00', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' sur la branche --> (${env.GIT_BRANCH}) du commit --> (${env.GIT_COMMIT}) (${env.BUILD_URL})")
       }
       always{
-            slackSend( channel: "#Jenkins", token: "slack_webhook token", color: "good", message: "Test Email")
+            slackSend ( channel: "#Jenkins", token: "slack_webhook token", color: "good", message: "Test Email")
       }  
 }       
-
+}
 //
 //
 
