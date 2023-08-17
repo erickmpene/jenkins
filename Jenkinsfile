@@ -160,7 +160,7 @@ pipeline {
     }
   post {
       success {
-        slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' sur la branche --> (${env.GIT_BRANCH}) du commit --> (${env.GIT_COMMIT}) (${env.BUILD_URL})")
+        slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' sur la branche --> '(${env.GIT_BRANCH})' du commit --> '(${env.GIT_COMMIT})' (<${env.BUILD_URL}|Open>)")
       }
       failure {
         slackSend (color: '#00FF00', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' sur la branche --> (${env.GIT_BRANCH}) du commit --> (${env.GIT_COMMIT}) (${env.BUILD_URL})")
