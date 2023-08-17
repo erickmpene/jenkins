@@ -29,6 +29,18 @@ pipeline {
             }
           }
         }
+
+        stage('DEBUG') {
+          agent any
+          steps {
+            script {
+              sh '''
+                env
+              '''
+            }
+          }
+        }
+
         stage('START_CONTAINER') {
           agent any 
           steps {
