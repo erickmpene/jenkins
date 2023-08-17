@@ -146,6 +146,7 @@ pipeline {
         stage('DEPLOY_PRODUCTION') {
           when{
               // expression { GIT_BRANCH == 'origin/main' }
+              beforeAgent true 
               branch 'main'
           }
           agent any 
