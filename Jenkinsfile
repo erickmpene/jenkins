@@ -21,6 +21,7 @@ pipeline {
     agent none   
     stages{
         stage('debug') {
+          agent any 
           steps{
               script {
                 sh 'echo "BRANCH_NAME: ${BRANCH_NAME}"'
