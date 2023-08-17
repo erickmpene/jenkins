@@ -37,6 +37,7 @@ pipeline {
             script {
               sh '''
               C_______________________________OMMIT=${GIT_COMMIT:0:7}
+              echo $C_______________________________OMMIT
               set
               env
               # sh 'docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${COMMIT} -f web/Dockerfile .'
