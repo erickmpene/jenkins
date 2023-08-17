@@ -44,6 +44,22 @@ firewall-cmd --zone=public --add-port=8080/tcp --permanent
 firewall-cmd --zone=public --add-service=http --permanent
 firewall-cmd --reload
 ```
+
+#### 9. Best practices
+
+##### 9.1 If you want to see the environment variables available when you deploy a job pipeline, implement the following stage:
+```sh
+        stage('DEBUG') {
+          agent any
+          steps {
+            script {
+              sh '''
+                env | sort 
+              '''
+            }
+          }
+        }
+```
 For any information you can visit this website --> [jenkins](https://pkg.jenkins.io/redhat-stable/)
 #### Enjoy ! 
 
