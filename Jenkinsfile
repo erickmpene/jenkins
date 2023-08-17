@@ -4,7 +4,8 @@ pipeline {
     environment {
       IMAGE_NAME = 'jenkins'
       DOCKER_HUB_ID = 'erickmpene'
-      IMAGE_TAG = 'latest' 
+      IMAGE_TAG = ${BRANCH_NAME} 
+      IMAGE_TAG_PRODUCTION = 'latest'
       CONTAINER_NAME = 'webapp-container'
       PORT_EXTERNE = 80
       PORT_INTERNE = 80
@@ -24,6 +25,7 @@ pipeline {
           steps {
             script {
               sh 'docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG} -f web/Dockerfile .'
+              sh 'docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG_PRODUCTION} -f web/Dockerfile .'
             }
           }
         }
@@ -99,6 +101,8 @@ pipeline {
               sh ''' 
                   docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" 
                   docker push ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG}
+                  docker push ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG_PRODUCTION}
+
               '''
             }
           }
@@ -137,7 +141,7 @@ pipeline {
           steps {
             sshagent(credentials: ['jenkins-admin-key']) {
               sh 'ssh -o StrictHostKeyChecking=no $PRODUCTION_USER@$PRODUCTION_APP_ENDPOINT'
-              sh 'ssh $PRODUCTION_USER@$PRODUCTION_APP_ENDPOINT "docker run -d --name ${CONTAINER_NAME} -p ${PORT_EXTERNE}:${PORT_INTERNE} ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG}"'
+              sh 'ssh $PRODUCTION_USER@$PRODUCTION_APP_ENDPOINT "docker run -d --name ${CONTAINER_NAME} -p ${PORT_EXTERNE}:${PORT_INTERNE} ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG_PRODUCTION}"'
               sh 'ssh $PRODUCTION_USER@$PRODUCTION_APP_ENDPOINT "docker rm -f ${CONTAINER_NAME}"'
             }
           }
