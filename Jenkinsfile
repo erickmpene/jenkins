@@ -1,3 +1,5 @@
+/* import shared library */
+
 @library('shared-library')
 
 pipeline {
