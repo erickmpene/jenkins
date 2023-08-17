@@ -37,7 +37,6 @@ pipeline {
             script {
               sh '''
               COMMIT=from-commit-${GIT_COMMIT:0:7}
-              echo $COMMIT
               docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${COMMIT} -f web/Dockerfile .
               docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG_PRODUCTION} -f web/Dockerfile .
               '''
@@ -49,8 +48,9 @@ pipeline {
           steps {
             script {
               sh ''' 
-                 docker run -d --name ${CONTAINER_NAME} -p ${PORT_EXTERNE}:${PORT_INTERNE} ${DOCKER_HUB_ID}/${IMAGE_NAME}:${COMMIT}
-                 sleep 5
+                COMMIT=from-commit-${GIT_COMMIT:0:7}
+                docker run -d --name ${CONTAINER_NAME} -p ${PORT_EXTERNE}:${PORT_INTERNE} ${DOCKER_HUB_ID}/${IMAGE_NAME}:${COMMIT}
+                sleep 5
               '''
             }
           }
