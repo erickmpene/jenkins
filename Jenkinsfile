@@ -1,14 +1,7 @@
-// Pipeline jenkins
-// Specified variables that can be reused
-
 pipeline {
     environment {
       IMAGE_NAME = 'jenkins'
-      // def branch = ${BRANCH_NAME}
-      // def commit = ${GIT_COMMIT}
       DOCKER_HUB_ID = 'erickmpene'
-      IMAGE_TAG = 'toto'
-      SHORT___________________COMMIT= '$GIT_COMMIT'
       IMAGE_TAG_PRODUCTION = 'latest'
       CONTAINER_NAME = 'webapp-container'
       PORT_EXTERNE = 80
@@ -33,20 +26,21 @@ pipeline {
                 // sh 'SHORT_COMMIT=${GIT_COMMIT}'  
                 sh 'SHORT_COMMIT=${GIT_COMMIT:0:7}' 
                 // sh 'Zx________COMMIT=GIT_COMMIT.take(7)'
-                sh 'set'
-                sh 'printenv'
+                // sh 'set'
+                // sh 'printenv'
               }
           }
         }
-        // stage('BUILD_IMAGE') {
-        //   agent any
-        //   steps {
-        //     script {
-        //       sh 'docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG} -f web/Dockerfile .'
-        //       sh 'docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG_PRODUCTION} -f web/Dockerfile .'
-        //     }
-        //   }
-        // }
+        stage('BUILD_IMAGE') {
+          agent any
+          steps {
+            script {
+              sh 'COMMIT=${GIT_COMMIT:0:7}'
+              sh 'docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${COMMIT} -f web/Dockerfile .'
+              sh 'docker build -t ${DOCKER_HUB_ID}/${IMAGE_NAME}:${IMAGE_TAG_PRODUCTION} -f web/Dockerfile .'
+            }
+          }
+        }
         // stage('START_CONTAINER') {
         //   agent any 
         //   steps {
