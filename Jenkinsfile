@@ -111,9 +111,9 @@ pipeline {
           }
         }
         stage('DEPLOY_REVIEW') {
-          // when{
-          //     changeRequest()
-          // }
+          when{
+              changeRequest()
+          }
           agent any 
           steps {
             sshagent(credentials: ['jenkins-admin-key']) {
