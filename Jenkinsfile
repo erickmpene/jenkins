@@ -25,7 +25,7 @@ pipeline {
           steps{
               script {
                 sh 'printenv'
-                echo "BRANCH_NAME is ${env.GIT_COMMIT,length=6}"
+                echo "BRANCH_NAME is ${GIT_COMMIT}"
               }
           }
         }
