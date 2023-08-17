@@ -4,7 +4,7 @@ pipeline {
     environment {
       IMAGE_NAME = 'jenkins'
       DOCKER_HUB_ID = 'erickmpene'
-      IMAGE_TAG = ${GIT_COMMIT[0..6]}
+      IMAGE_TAG = "${GIT_COMMIT}"
       IMAGE_TAG_PRODUCTION = 'latest'
       CONTAINER_NAME = 'webapp-container'
       PORT_EXTERNE = 80
@@ -25,7 +25,7 @@ pipeline {
           steps{
               script {
                 sh 'printenv'
-                echo "THE COMMIT is ${GIT_COMMIT[0..6]}"
+                THE_COMMIT = ${GIT_COMMIT[0..6]}
               }
           }
         }
