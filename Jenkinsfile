@@ -27,7 +27,7 @@ pipeline {
               script {
                 // sh 'ZHE_____COMMIT="${GIT_COMMIT[0..7]}"'
                 // sh 'GIT_HASH = GIT_COMMIT.take(7)'
-                sh 'SHORT_COMMIT="${env.GIT_COMMIT[0..7]}"'
+                sh 'SHORT_COMMIT="${env.GIT_COMMIT}"'
                 // sh 'Zx________COMMIT=GIT_COMMIT.take(7)'
                 // sh 'set'
                 // sh 'printenv'
