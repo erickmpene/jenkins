@@ -1,10 +1,11 @@
 // Pipeline jenkins
 // Specified variables that can be reused
-def branch = ${BRANCH_NAME}
-def commit = ${GIT_COMMIT}
+
 pipeline {
     environment {
       IMAGE_NAME = 'jenkins'
+      def branch = ${BRANCH_NAME}
+      def commit = ${GIT_COMMIT}
       DOCKER_HUB_ID = 'erickmpene'
       IMAGE_TAG = 'toto'
       // SHORT___________________COMMIT= '${GIT_COMMIT}'
