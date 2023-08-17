@@ -25,7 +25,7 @@ pipeline {
           agent any 
           steps{
               script {
-                // sh 'ZHE_______COMMIT="${GIT_COMMIT[0..7]}"'
+                // sh 'ZHE_____COMMIT="${GIT_COMMIT[0..7]}"'
                 sh 'Zx________COMMIT=GIT_COMMIT.take(7)'
                 sh 'set'
                 sh 'printenv'
