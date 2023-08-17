@@ -1,3 +1,4 @@
+[![Build Status](https://jenkins.notylus.com/buildStatus/icon?job=jenkins)](https://jenkins.notylus.com/job/jenkins/)
 #### Deploy Jenkins Redhat/Centos Packages
 
 [![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
