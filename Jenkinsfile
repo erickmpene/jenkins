@@ -24,6 +24,7 @@ pipeline {
           agent any 
           steps{
               script {
+                sh(script: 'env|sort', returnStdout: true)
                 echo "BRANCH_NAME is ${env.GIT_BRANCH}"
                 echo "BRANCH_NAME is ${env.BUILD_NUMBER}"
                 echo "BRANCH_NAME is ${env.BUILD_ID}"
