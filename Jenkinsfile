@@ -4,7 +4,7 @@ pipeline {
     environment {
       IMAGE_NAME = 'jenkins'
       DOCKER_HUB_ID = 'erickmpene'
-      IMAGE_TAG = "${GIT_COMMIT}"
+      IMAGE_TAG = $GIT_COMMIT
       IMAGE_TAG_PRODUCTION = 'latest'
       CONTAINER_NAME = 'webapp-container'
       PORT_EXTERNE = 80
