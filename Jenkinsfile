@@ -23,7 +23,7 @@ pipeline {
         stage('debug') {
           steps{
               script {
-                echo "BRANCH_NAME: ${BRANCH_NAME}"
+                sh 'echo "BRANCH_NAME: ${BRANCH_NAME}"'
               }
           }
         }
