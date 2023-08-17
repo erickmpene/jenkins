@@ -4,7 +4,7 @@ pipeline {
     environment {
       IMAGE_NAME = 'jenkins'
       DOCKER_HUB_ID = 'erickmpene'
-      IMAGE_TAG = "${BRANCH_NAME}"
+      IMAGE_TAG = 'bisalela'
       IMAGE_TAG_PRODUCTION = 'latest'
       CONTAINER_NAME = 'webapp-container'
       PORT_EXTERNE = 80
@@ -20,6 +20,13 @@ pipeline {
     }
     agent none   
     stages{
+        stage('debug') {
+          steps{
+              script {
+                echo "BRANCH_NAME: ${BRANCH_NAME}"
+              }
+          }
+        }
         stage('BUILD_IMAGE') {
           agent any
           steps {
