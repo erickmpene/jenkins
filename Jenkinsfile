@@ -21,10 +21,10 @@ pipeline {
       MAIN_BRANCH = 'main'
       STAGING_BRANCH = 'fx_1'
     }
-    agent none   
+    agent { label 'node-2'}  
     stages{
         stage('BUILD_IMAGE') {
-          agent any
+          agent any 
           steps {
             script {
               sh '''
