@@ -1,3 +1,7 @@
+/* import shared library */
+
+@Library('shared-library')_
+
 pipeline {
     environment {
       IMAGE_NAME = 'jenkins'
@@ -14,6 +18,8 @@ pipeline {
       REVIEW_USER = 'jenkins-review'
       STAGING_USER = 'jenkins-staging'
       PRODUCTION_USER = 'jenkins-production'
+      MAIN_BRANCH = 'main'
+      STAGING_BRANCH = 'fx_1'
     }
     agent none   
     stages{
@@ -143,7 +149,7 @@ pipeline {
           }
         }   
         stage('DEPLOY_PRODUCTION') {
-          when{
+          when {
               expression { GIT_BRANCH == 'origin/main' }
           }
           agent any 
@@ -159,16 +165,11 @@ pipeline {
         }   
     }
   post {
-      success {
-        slackSend (color: '#00FF00', message: "Job deployed successfully : Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'  (<${env.BUILD_URL}|Lien vers le job>)")
-      }
-      failure {
-        slackSend (color: '#00FF00', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-      }
       always{
-            slackSend ( channel: "Jenkins-ngh", token: "Prrrn6ueShlhbcYXwIJSd7C7", color: "good", message: "Test Email")
+        script {
+          slackNotifier currentBuild.result 
+        }
       }  
   }       
 }
 
-//
