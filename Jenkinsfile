@@ -21,7 +21,7 @@ pipeline {
       MAIN_BRANCH = 'main'
       STAGING_BRANCH = 'fx_1'
     }
-    agent { label 'node-2'}  
+    agent any  
     stages{
         stage('BUILD_IMAGE') {
           agent any 
